@@ -11,19 +11,17 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    env:
-      tag: ${{ github.run_number }}
     steps:
     - uses: actions/checkout@v3
     - name: check ENV
       run: env
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag jaanuk/home_chores:$tag --build-arg DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
+      run: docker build . --file Dockerfile --tag jaanuk/home_chores:${{ github.run_number }} --build-arg DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
   
     - name: Build and push
       uses: docker/build-push-action@v5
       with:
         context: .
         push: true
-        tags: jaanuk/home_chores:$tag
+        tags: jaanuk/home_chores:${{ github.run_number }}
   
