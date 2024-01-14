@@ -11,11 +11,12 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    env:
+      tag: $(date +%s)
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag jaanuk/home_chores:$(date +%s)
+      run: docker build . --file Dockerfile --tag jaanuk/home_chores:$tag
 
     - name: Login to Docker Hub
       uses: docker/login-action@v3
@@ -29,5 +30,5 @@ jobs:
           context: .
           push: true
           tags: |
-            jaanuk/home_chores:latest
+            jaanuk/home_chores:$tag
       
