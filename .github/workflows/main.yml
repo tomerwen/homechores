@@ -24,13 +24,13 @@ jobs:
         pip install -r requirements.txt
 
     - name: Build Docker image
-      run: docker build -t your-docker-username/your-app-name:latest .
+      run: docker build -t jaanuk32/home_chores:latest .
 
     - name: Login to Docker Hub
-      run: docker login -u your-docker-username -p ${{ secrets.DOCKER_PASSWORD }}
+      run: docker login -u jaanuk32 -p ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Tag Docker image with version
-      run: docker tag your-docker-username/your-app-name:latest your-docker-username/your-app-name:1.0.${{ github.run_number }}
+      run: docker tag jaanuk32/home_chores:latest jaanuk32/home_chores:1.0.${{ github.run_number }}
 
     - name: Push Docker image
-      run: docker push your-docker-username/your-app-name:latest && docker push your-docker-username/your-app-name:1.0.${{ github.run_number }}
+      run: docker push jaanuk32/home_chores:latest && docker push jaanuk32/home_chores:1.0.${{ github.run_number }}
