@@ -1,0 +1,36 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Build Docker image
+      run: docker build -t your-docker-username/your-app-name:latest .
+
+    - name: Login to Docker Hub
+      run: docker login -u your-docker-username -p ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Tag Docker image with version
+      run: docker tag your-docker-username/your-app-name:latest your-docker-username/your-app-name:1.0.${{ github.run_number }}
+
+    - name: Push Docker image
+      run: docker push your-docker-username/your-app-name:latest && docker push your-docker-username/your-app-name:1.0.${{ github.run_number }}
