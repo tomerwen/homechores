@@ -23,4 +23,5 @@ jobs:
           --tag jaanuk/home_chores:latest \
           --build-arg DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }} \
           --build-arg DOCKER_PASSWORD=${{ secrets.DOCKER_PASSWORD }} \
+          --build-arg DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
           --push .
