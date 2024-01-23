@@ -6,6 +6,7 @@
   become_user: root  
   vars:
     ansible_become_pass: "ansible" 
+    ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
   tasks:
     - name: Stop the container
       ansible.builtin.docker_container:
