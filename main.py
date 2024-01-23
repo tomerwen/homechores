@@ -5,9 +5,9 @@ import os
 app = Flask(__name__)
 
 # Configure the PostgreSQL database connection
-docker_password = os.environ.get('DOCKER_PASSWORD', 'choresaregreat')
+db_password = os.environ.get('DOCKER_PASSWORD')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://postgres:{docker_password}@chores.cna20s0e8osw.il-central-1.rds.amazonaws.com:5432/postgres'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://postgres:{db_password}@chores.cna20s0e8osw.il-central-1.rds.amazonaws.com:5432/postgres'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -55,4 +55,4 @@ def user_info(user_name):
     return render_template('user_info.html', user=user_name, chores=all_chores)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000 , debug=True)
