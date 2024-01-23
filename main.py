@@ -7,7 +7,7 @@ app = Flask(__name__)
 # Configure the PostgreSQL database connection
 db_password = os.environ.get('DB_PASSWORD')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://postgres:{db_password}@chores.cna20s0e8osw.il-central-1.rds.amazonaws.com:5432/postgres'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://postgres:choresaregreat@chores.cna20s0e8osw.il-central-1.rds.amazonaws.com:5432/postgres'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
