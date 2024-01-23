@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 import os
+from datetime import datetime
+
 
 app = Flask(__name__)
 
@@ -18,6 +20,9 @@ class Chores(db.Model):
     options = db.Column(db.String(30), nullable=False)
     frequency = db.Column(db.String(30), nullable=False)
     last = db.Column(db.Date)
+    def finish_chore(self):
+        self.last = datetime.datetime.now()
+        db.session.commit()
 
 # Landing page
 @app.route('/', methods=['GET', 'POST'])
@@ -48,6 +53,15 @@ def add_chore():
             return "Chore added successfully!"
 
     return render_template('add-chore.html')
+
+@app.route('/finish-chore/<int:chore_id>')
+def finish_chore(chore_id):
+    chore = Chores.query.get(chore_id)
+    if chore:
+        chore.finish_chore()
+        return redirect(url_for('user_info', user_name='your_user_name'))
+    else:
+        return "Chore not found."
 
 @app.route('/<user_name>')
 def user_info(user_name):

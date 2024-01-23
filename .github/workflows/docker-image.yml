@@ -25,3 +25,7 @@ jobs:
           --build-arg DOCKER_PASSWORD=${{ secrets.DOCKER_PASSWORD }} \
           --build-arg DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
           --push .
+    - name: install ansible
+      run: pip install ansible
+    - name: Ansible deploy
+      run: ansible-playbook -i inventory ansible-deploy-playbook.yml

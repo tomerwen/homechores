@@ -1,0 +1,38 @@
+---
+- name: Docker Actions
+  hosts: ansible_host
+  become: yes
+  tasks:
+    - name: Log in to the server
+      ansible.builtin.shell: ssh ansible@51.17.127.218
+
+    - name: Stop the container
+      ansible.builtin.docker_container:
+        name: chores
+        state: stopped
+      ignore_errors: yes
+
+    - name: Remove the container
+      ansible.builtin.docker_container:
+        name: chores
+        state: absent
+      ignore_errors: yes
+
+    - name: Remove the image
+      ansible.builtin.docker_image:
+        name: jaanuk/home_chores:latest
+        state: absent
+      ignore_errors: yes
+
+    - name: Create a new image and run the container
+      ansible.builtin.docker_container:
+        name: chores
+        image: jaanuk/home_chores:latest
+        state: started
+        restart_policy: always
+        env:
+          DOCKERHUB_USERNAME: "{{ secrets.DOCKERHUB_USERNAME }}"
+          DOCKER_PASSWORD: "{{ secrets.DOCKER_PASSWORD }}"
+          DB_PASSWORD: "{{ secrets.DB_PASSWORD }}"
+        published_ports:
+          - "8080:5000"
