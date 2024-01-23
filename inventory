@@ -1,2 +1,2 @@
 [ansible_host]
-51.17.127.218
+51.17.127.218 ansible_user=ansible ansible_password=ansible
