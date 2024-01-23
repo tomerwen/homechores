@@ -27,5 +27,13 @@ jobs:
           --push .
     - name: install ansible
       run: pip install ansible
-    - name: Ansible deploy
-      run: ansible-playbook -i inventory ansible-deploy-playbook.yml
+    - name: Run Ansible playbook
+      run: |
+          docker run --rm -v "$(pwd):/ansible" -w /ansible \
+          ansible/ansible-runner:latest ansible-playbook ansible-deploy-playbook.yml
+
+      env:
+        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      
