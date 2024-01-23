@@ -7,9 +7,6 @@
   vars:
     ansible_become_pass: "ansible" 
   tasks:
-    - name: Log in to the server
-      ansible.builtin.shell: ssh ansible@51.17.127.218
-
     - name: Stop the container
       ansible.builtin.docker_container:
         name: chores
