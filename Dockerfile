@@ -12,7 +12,6 @@ WORKDIR /app
 COPY . /app
 
 RUN pip install --no-cache-dir -r requirements.txt
-RUN cat /home/runner/.docker/config.json
 
 EXPOSE 80
 
