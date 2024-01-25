@@ -54,14 +54,14 @@ def add_chore():
 
     return render_template('add-chore.html')
 
-@app.route('/finish-chore/<int:chore_id>')
-def finish_chore(chore_id):
-    chore = Chores.query.get(chore_id)
-    if chore:
-        chore.finish_chore()
-        return redirect(url_for('user_info', user_name='your_user_name'))
-    else:
-        return "Chore not found."
+# @app.route('/finish-chore/<int:chore_id>')
+# def finish_chore(chore_id):
+#     chore = Chores.query.get(chore_id)
+#     if chore:
+#         chore.finish_chore()
+#         return redirect(url_for('user_info', user_name='your_user_name'))
+#     else:
+#         return "Chore not found."
 
 @app.route('/<user_name>')
 def user_info(user_name):
