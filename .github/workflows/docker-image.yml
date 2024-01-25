@@ -25,15 +25,4 @@ jobs:
           --build-arg DOCKER_PASSWORD=${{ secrets.DOCKER_PASSWORD }} \
           --build-arg DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
           --push .
-    - name: install ansible
-      run: pip install ansible
-    - name: Run Ansible playbook
-      run: |
-          docker run --rm -v "$(pwd):/ansible" -w /ansible \
-          ansible/ansible-runner:latest ansible-playbook ansible-deploy-playbook.yml
-
-      env:
-        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
       
