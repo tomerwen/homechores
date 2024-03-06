@@ -8,6 +8,7 @@ app = Flask(__name__)
 
 # Configure the PostgreSQL database connection
 db_password = os.environ.get('DB_PASSWORD')
+db_host= os.environ.get('postgres-service')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://postgres:{db_password}@chores.cna20s0e8osw.il-central-1.rds.amazonaws.com:5432/postgres'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -24,7 +25,6 @@ class Chores(db.Model):
         self.last = datetime.datetime.now()
         db.session.commit()
 
-# Landing page
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -54,14 +54,6 @@ def add_chore():
 
     return render_template('add-chore.html')
 
-# @app.route('/finish-chore/<int:chore_id>')
-# def finish_chore(chore_id):
-#     chore = Chores.query.get(chore_id)
-#     if chore:
-#         chore.finish_chore()
-#         return redirect(url_for('user_info', user_name='your_user_name'))
-#     else:
-#         return "Chore not found."
 
 @app.route('/<user_name>')
 def user_info(user_name):
