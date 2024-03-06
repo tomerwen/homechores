@@ -27,6 +27,7 @@ spec:
       containers:
       - name: chores-app
         image: jaanuk/home_chores:latest
+        imagePullPolicy: Always
         ports:
           - containerPort: 5000
         env:
