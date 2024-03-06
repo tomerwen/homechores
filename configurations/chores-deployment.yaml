@@ -27,18 +27,18 @@ spec:
       containers:
       - name: chores-app
         image: jaanuk/home-chores:latest
-      imagePullSecrets:
-      - name: dockerhub-credentials
         ports:
-        - containerPort: 5000
+          - containerPort: 5000
         env:
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: postgres-password
-              key: POSTGRES_PASSWORD
-        - name: DB_HOST
-          valueFrom:
-            secretKeyRef:
-              name: db-host
-              key: DB_HOST
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-password
+                key: POSTGRES_PASSWORD
+          - name: DB_HOST
+            valueFrom:
+              secretKeyRef:
+                name: db-host
+                key: DB_HOST
+      imagePullSecrets:
+        - name: dockerhub-credentials
