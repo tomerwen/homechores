@@ -10,7 +10,7 @@ app = Flask(__name__)
 db_password = os.environ.get('DB_PASSWORD')
 db_host= os.environ.get('DB_HOST')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://postgres:{db_password}@{db_host}:5432/postgres'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://postgres:{db_password}@{db_host}:5432/chores'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
