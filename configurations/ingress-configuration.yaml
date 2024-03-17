@@ -1,18 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: chores-ingress
+  namespace: default
 spec:
   rules:
-    - host: home-chores.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: chores-app
-                port:
-                  number: 80
+  - host: your.domain.com  # Replace this with your actual domain or IP
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: chores-app
+            port:
+              number: 80
