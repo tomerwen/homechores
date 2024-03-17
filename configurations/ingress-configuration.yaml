@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   rules:
-  - host: your.domain.com  # Replace this with your actual domain or IP
+  - host: chores-app
     http:
       paths:
       - path: /
