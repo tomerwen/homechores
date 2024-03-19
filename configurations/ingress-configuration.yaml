@@ -1,13 +1,19 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: chores-ingress
-  namespace: default
+  name: ingress-controller
 spec:
   rules:
   - host: chores-app
     http:
       paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: chores-app
+            port:
+              number: 80
       - path: /
         pathType: Prefix
         backend:
