@@ -1,17 +1,21 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: chores-ingress
   annotations:
-    kubernetes.io/ingress.class: ingress-nginx
+    kubernetes.io/ingress.class: nginx
 spec:
   rules:
   - host: chores-app
     http:
       paths:
-      - backend:
-          serviceName: chores-app
-          servicePort: 80
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: chores-app
+            port:
+              number: 80
 status:
   loadBalancer:
     ingress:
