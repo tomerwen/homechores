@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: chores-app
+spec:
+  selector:
+    app: chores-app
+  ports:
+    - protocol: TCP
+      port: 2345
+      targetPort: 5000
+      nodePort: 30080
+  type: NodePort
