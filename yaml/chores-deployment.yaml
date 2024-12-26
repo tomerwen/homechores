@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chores-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chores-app
+  template:
+    metadata:
+      labels:
+        app: chores-app
+    spec:
+      containers:
+        - name: chores-app
+          image: chores:1.0
+          ports:
+            - containerPort: 5000
